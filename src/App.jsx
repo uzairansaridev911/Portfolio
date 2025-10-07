@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Typed from 'typed.js'; 
-import myimg from '../images/Image.jpg'
+import myimg from '../images/Image.jpg';
+import cv from '../images/CV.jpg';
 import { Github, Linkedin, Mail, Code, Sparkles, ArrowRight, Globe, Menu, X } from 'lucide-react';
 import LocomotiveScroll from 'locomotive-scroll';
 const locomotiveScroll = new LocomotiveScroll();
@@ -274,7 +275,7 @@ Best regards,
                   </span>
                 </a>
                 
-                <a href='../images/CV.jpg' download="/CV.jpg" className="px-8 py-4 border-2 border-cyan-500/50 rounded-2xl font-semibold text-lg hover:bg-cyan-500/10 transition-all duration-300 hover:scale-105 hover:border-cyan-400">
+                <a href={cv} download={cv} className="px-8 py-4 border-2 border-cyan-500/50 rounded-2xl font-semibold text-lg hover:bg-cyan-500/10 transition-all duration-300 hover:scale-105 hover:border-cyan-400">
                   Download CV
                 </a>
               </div>
