@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Typed from 'typed.js'; 
+import myimg from '../images/Image.jpg'
 import { Github, Linkedin, Mail, Code, Sparkles, ArrowRight, Globe, Menu, X } from 'lucide-react';
 import LocomotiveScroll from 'locomotive-scroll';
 const locomotiveScroll = new LocomotiveScroll();
@@ -312,7 +313,7 @@ Best regards,
                   <div className="relative w-full h-full rounded-full overflow-hidden border-4 border-white/10 shadow-2xl transform hover:scale-105 transition-transform duration-500">
                     <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/20 to-purple-600/20"></div>
                     <img 
-                      src="../images/Image.jpg"
+                      src={myimg}
                       alt="Portfolio"
                       className="w-full h-full object-cover"
                     />
