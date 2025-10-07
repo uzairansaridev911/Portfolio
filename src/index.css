@@ -1,0 +1,39 @@
+@import "tailwindcss";
+/* Scrollbar ko Webkit-based Browsers (Chrome, Safari, Edge) ke liye style karna */
+
+/* 1. Scrollbar ki overall width/height set karein */
+body::-webkit-scrollbar {
+  width: 12px; /* Vertical scrollbar ki width */
+  height: 10px; /* Agar horizontal scrollbar ho toh uski height */
+}
+
+/* 2. Scrollbar ka Track (background) set karein */
+body::-webkit-scrollbar-track {
+  background: #18021f; /* Theme ke background color se match karta hua */
+  border-radius: 10px;
+}
+
+/* 3. Scrollbar ka Thumb (woh hissa jise hum drag karte hain) set karein */
+body::-webkit-scrollbar-thumb {
+  /* Scrollbar Thumb par aapka matching gradient apply karein */
+  background: linear-gradient(
+    45deg,
+    #00bcd4, /* Cyan-like (from-cyan-400/500) */
+    #a855f7, /* Purple-like (via-purple-500/600) */
+    #ec4899  /* Pink-like (to-pink-500/600) */
+  );
+  border-radius: 10px;
+  border: 1px solid #ffffff1a; /* Thoda sa light border de dein */
+}
+
+/* Optional: Hover effect for a subtle change */
+body::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(
+    45deg,
+    #22d3ee, /* Thoda zyada bright cyan */
+    #c084fc, /* Thoda zyada bright purple */
+    #f472b6  /* Thoda zyada bright pink */
+  );
+}
+
+/* Agar aap sirf ek hi component par lagana chahte hain, toh 'body' ki jagah us component ki class use karein. */
