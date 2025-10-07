@@ -42,7 +42,7 @@ Looking forward to working with you.
 
 Best regards,
 [Your Name or Position]`);
-  const mailtoLink = `https://mail.google.com/mail/?view=cm&fs=1&to=${myEmail}&su=${subject}&body=${body}`;
+  const mailtoLink = `https://gmail.google.com/mail/?view=cm&fs=1&to=${myEmail}&su=${subject}&body=${body}`;
 
   const myphonenumber = "923283672744";
   const prefilledMessage = "Hey there Uzair Ansari, I want to talk to you!";
