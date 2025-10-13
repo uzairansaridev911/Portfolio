@@ -4,7 +4,11 @@ import myimg from '../images/Image.jpg';
 import cv from '../images/CV.jpg';
 import { Github, Linkedin, Mail, Code, Sparkles, ArrowRight, Globe, Menu, X } from 'lucide-react';
 import LocomotiveScroll from 'locomotive-scroll';
+import voice from '../Sounds/Voice.mp3';
+import welcome from '../Sounds/Welcome.wav'
 const locomotiveScroll = new LocomotiveScroll();
+
+
 
 export default function Portfolio() {
   const [isLoaded, setIsLoaded] = useState(false);
