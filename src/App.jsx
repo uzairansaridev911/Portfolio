@@ -212,7 +212,7 @@ Best regards,
       <div 
         className={`fixed top-0 right-0 w-full h-full max-w-xs sm:max-w-sm bg-[#18021f]/95 backdrop-blur-lg z-40 transition-transform duration-500 ease-in-out md:hidden ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}
       >
-        <div className="pt-24 px-6 flex flex-col space-y-4">
+        <div className="pt-32 px-6 flex flex-col space-y-4">
           {[
             { name: 'Home', href: '#home' }, 
             { name: 'Skills', href: '#skills' }, 
