@@ -1,26 +1,25 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Typed from 'typed.js'; 
-// 💡 UPDATED Sound Imports: Naye imports ka istemal
-import voiceSound from '../Sounds/Voice.mp3'; // Voice sound
-import welcomeSound from '../Sounds/Welcome.wav'; // Welcome sound
-
 import myimg from '../images/Image.jpg';
 import cv from '../images/CV.jpg';
 import { Github, Linkedin, Mail, Code, Sparkles, ArrowRight, Globe, Menu, X } from 'lucide-react';
 import LocomotiveScroll from 'locomotive-scroll';
 const locomotiveScroll = new LocomotiveScroll();
 
-
 export default function Portfolio() {
   const [isLoaded, setIsLoaded] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 }); 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   
-  // 💡 NEW: State to track if sounds are ready to play
-  const [areSoundsReady, setAreSoundsReady] = useState(false); 
+  // ❌ Old typing states are removed.
+  // const [typedText, setTypedText] = useState('');
+  // const [currentRoleIndex, setCurrentRoleIndex] = useState(0);
+  // const [isDeleting, setIsDeleting] = useState(false);
   
+  // 💡 NEW: Typed.js ke liye useRef hook.
   const typedElement = useRef(null);
   
+  // State to track scroll position
   const [isAtBottom, setIsAtBottom] = useState(false); 
   
   const countRef1 = useRef(null);
@@ -50,69 +49,6 @@ Best regards,
   const prefilledMessage = "Hey there Uzair Ansari, I want to talk to you!";
   const whatsappLink = `https://wa.me/${myphonenumber}?text=${prefilledMessage}`;
   const projectsurl = "https://github.com/uzairansaridev911?tab=repositories";
-
-  // ------------------------------------
-  // ## 🎵 Sound Loading Effect (Checks if sounds are buffered)
-  // ------------------------------------
-  useEffect(() => {
-    // Correctly using the new imported variables
-    const audio1 = new Audio(voiceSound); 
-    const audio2 = new Audio(welcomeSound);
-    
-    let loadedCount = 0;
-    const totalSounds = 2;
-
-    const checkLoad = () => {
-      loadedCount++;
-      if (loadedCount === totalSounds && isLoaded) { 
-        setAreSoundsReady(true);
-      }
-    };
-    
-    audio1.addEventListener('canplaythrough', checkLoad);
-    audio2.addEventListener('canplaythrough', checkLoad);
-
-    if (audio1.readyState >= 3) checkLoad();
-    if (audio2.readyState >= 3) checkLoad();
-    
-    return () => {
-      audio1.removeEventListener('canplaythrough', checkLoad);
-      audio2.removeEventListener('canplaythrough', checkLoad);
-    };
-
-  }, [isLoaded]); 
-
-  // ------------------------------------
-  // ## 🎵 Sound Playback Effect (Plays Voice first, then Welcome)
-  // ------------------------------------
-  useEffect(() => {
-    if (areSoundsReady) {
-      const voiceAudio = new Audio(voiceSound);
-      const welcomeAudio = new Audio(welcomeSound);
-      
-      // 1. Pehle Voice sound play karo
-      voiceAudio.volume = 1.0; // Full volume for voice
-      voiceAudio.play().catch(error => console.error("Error playing voice sound:", error));
-      
-      // 2. Welcome sound ko 0.5 ya 0.8 seconds ke delay se play karo
-      // 💡 DELAY: 800ms (0.8 seconds) set kiya hai. Aap ise 500ms bhi kar sakte hain.
-      const WELCOME_START_DELAY_MS = 800; 
-      
-      const welcomeTimeout = setTimeout(() => {
-        welcomeAudio.volume = 0.5; // Welcome/Jingle ko thoda halka rakha hai
-        welcomeAudio.play().catch(error => console.error("Error playing welcome sound:", error));
-      }, WELCOME_START_DELAY_MS); 
-
-      // Cleanup function to stop sounds and clear timeout
-      return () => {
-        voiceAudio.pause();
-        welcomeAudio.pause();
-        clearTimeout(welcomeTimeout);
-      };
-    }
-  }, [areSoundsReady]);
-  // ------------------------------------
-
 
   // --- Utility Effects (Scroll/Mouse) (No Change) ---
   useEffect(() => {
@@ -147,22 +83,24 @@ Best regards,
     };
   }, []);
   
-  // --- Typed.js Effect (No Change) ---
+  // --- 💡 NEW: Typed.js Effect ---
   useEffect(() => {
     if (typedElement.current) {
       const typed = new Typed(typedElement.current, {
-        strings: roles, 
-        typeSpeed: 50, 
-        backSpeed: 100,  
-        loop: true,     
-        showCursor: true, 
+        strings: roles, // Jo roles array hai, woh yahan se uthega
+        typeSpeed: 50, // Typing ki speed
+        backSpeed: 100,  // Deleting ki speed
+        loop: true,     // Bar-bar chalta rahe
+        showCursor: true, // Cursor dikhane ke liye aapko manual blinker use karna padega (jaise abhi hai)
       });
 
+      // Cleanup function to destroy Typed instance on component unmount
       return () => {
         typed.destroy();
       };
     }
-  }, [roles]); 
+  }, [roles]); // roles array change hone par effect dobara chale
+  // ------------------------------------
 
   // --- CountUp Effect (No Change) ---
   useEffect(() => {
@@ -206,6 +144,7 @@ Best regards,
   return (
     <div className="relative min-h-screen bg-[#18021f] text-white overflow-hidden">
       {/* Animated Background Orbs (No Change) */}
+      {/* ... (Existing code) ... */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
         <div 
           className="absolute w-96 h-96 bg-cyan-500/20 rounded-full blur-3xl transition-all duration-1000"
@@ -219,6 +158,7 @@ Best regards,
       </div>
 
       {/* Navigation (No Change) */}
+      {/* ... (Existing code) ... */}
       <nav className={`fixed top-0 w-full z-50 transition-all duration-700 ${isLoaded ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0'}`}>
         <div className="max-w-7xl mx-auto px-6 py-6">
           <div className="flex justify-between items-center backdrop-blur-xl bg-white/5 rounded-2xl px-8 py-4 border border-white/10 shadow-2xl">
@@ -268,6 +208,7 @@ Best regards,
       </nav>
 
       {/* Mobile Menu (No Change) */}
+      {/* ... (Existing code) ... */}
       <div 
         className={`fixed top-0 right-0 w-full h-full max-w-xs sm:max-w-sm bg-[#18021f]/95 backdrop-blur-lg z-40 transition-transform duration-500 ease-in-out md:hidden ${isMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}
       >
@@ -299,7 +240,7 @@ Best regards,
         </div>
       </div>
 
-      {/* Hero Section (No Change) */}
+      {/* Hero Section */}
       <section id="home" className="relative min-h-screen flex items-center justify-center px-6 pt-32 pb-20">
         <div className="max-w-7xl mx-auto w-full">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
@@ -313,8 +254,10 @@ Best regards,
               <div className="space-y-4">
                 <h1 className="text-6xl md:text-7xl lg:text-8.5xl font-bold leading-tight">
                   <span className="block">Uzair Ansari</span>
+                  {/* 💡 CHANGE: Typed Text Container */}
                   <span className="block bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 bg-clip-text text-transparent">
                     <span ref={typedElement}></span>
+                    {/* Blink effect (Typed.js cursor is usually hidden, using Tailwind's animate-pulse for consistency) */}
                     <span className="animate-pulse">|</span> 
                   </span>
                 </h1>
@@ -323,6 +266,7 @@ Best regards,
                 </p>
               </div>
 
+              {/* ... (Buttons and Social Icons) ... */}
               <div className="flex flex-wrap gap-4">
                 <a href={mailtoLink} target="_blank" rel="noopener noreferrer" className="group relative overflow-hidden px-8 py-4 bg-gradient-to-r from-cyan-500 to-purple-600 rounded-2xl font-semibold text-lg transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-cyan-500/50">
                   <span className="relative z-10 flex items-center space-x-2">
@@ -356,6 +300,7 @@ Best regards,
               </div>
             </div>
 
+            {/* ... (Image and Stats) ... */}
             <div className={`relative transition-all duration-1000 delay-500 ${isLoaded ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0'}`}>
               <div className="relative">
                 <div className="absolute inset-0 flex items-center justify-center">
@@ -417,6 +362,7 @@ Best regards,
       </section>
 
       {/* Services Section (Skills) (No Change) */}
+      {/* ... (Existing code) ... */}
       <section id="skills" className="relative py-20 px-6">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
@@ -483,6 +429,7 @@ Best regards,
       </section>
 
       {/* Footer (No Change) */}
+      {/* ... (Existing code) ... */}
       <footer className="relative border-t border-white/10 py-12 px-6 mt-20">
         <div className="max-w-7xl mx-auto">
           <div id="contact-footer" className="text-center mb-8">
@@ -523,6 +470,7 @@ Best regards,
 
 
       {/* Scroll Indicator (No Change) */}
+      {/* ... (Existing code) ... */}
       <div 
         className={`fixed bottom-8 left-1/2 -translate-x-1/2 transition-all duration-1000 delay-1000 hidden sm:block ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
       >
@@ -541,6 +489,7 @@ Best regards,
       </div>
       
       {/* CSS Keyframes (No Change) */}
+      {/* ... (Existing code) ... */}
       <style jsx="true">{`
 
         /* SCROLL DOWN ANIMATION */
